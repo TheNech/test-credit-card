@@ -1,0 +1,107 @@
+.credit-card {
+    display: flex;
+    background-color: #fbfbfb;
+    padding: 20px 30px;
+
+    &__card {
+        display: flex;
+        align-items: center;
+        padding: 0 30px;
+
+        img {
+            object-fit: cover;
+            width: 300px;
+        }
+    }
+
+    &__form {
+        width: 270px;
+    }
+
+    .form {
+        &__header {
+            color: #393939;
+        }
+
+        &__content {
+            padding-bottom: 20px;
+        }
+
+        &__control {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+            font-size: 1rem;
+
+            &_double {
+                display: flex;
+                justify-content: space-between;
+
+                >div {
+                    width: 46%;
+                }
+            }
+
+            &_invalid {
+                .form__control-input {
+                    color: #ee5b5b;
+                    border-color: #ee5b5b;
+                }
+
+                .form__control-error {
+                    visibility: visible;
+                }
+            }
+
+            &-title {
+                color: #b6b6b6;
+                margin-bottom: 10px;
+            }
+
+            &-input {
+                padding: 5px;
+                border: none;
+                border-bottom: solid 1px #f3f3f3;
+                background-color: transparent;
+                color: #919191;
+                outline: none;
+            }
+
+            &-error {
+                height: 0.8rem;
+                padding: 5px 0;
+                font-size: 0.8rem;
+                color: #ee5b5b;
+                visibility: hidden;
+            }
+        }
+
+        &__button button{
+            cursor: pointer;
+            width: 100%;
+            background-color: #4d4776;
+            border: none;
+            border-radius: 7px;
+            padding: 10px 0;
+            color: #ffffff;
+        }
+
+        &__sucess-msg {
+            padding: 5px;
+            text-align: center;
+            height: 1rem;
+        }
+
+    }
+
+    &__payment-system-icon {
+        position: absolute;
+        top: 30px;
+        right: 0;
+
+        img {            
+            height: 20px;
+        }
+    }
+}

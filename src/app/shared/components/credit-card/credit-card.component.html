@@ -1,0 +1,90 @@
+<div class="credit-card">
+    <div class="credit-card__card">
+        <img src="assets/credit_card.png"
+             alt="Credit Card">
+    </div>
+    <div class="credit-card__form">
+        <form *ngIf="form"
+              [formGroup]="form">
+            <h3 class="form__header">
+                Payment Details
+            </h3>
+            <div class="form__content">
+                <div class="form__control"
+                     [class.form__control_invalid]="nameFieldErrorMsg">
+                    <span class="form__control-title">Name on Card</span>
+                    <input class="form__control-input"
+                           type="text"
+                           formControlName="name"
+                           [maxlength]="NAME_MAX_LENGTH"
+                           (blur)="setNameFieldErrorMsg()">
+                    <span class="form__control-error">{{ nameFieldErrorMsg }}</span>
+                </div>
+                <div class="form__control"
+                     [class.form__control_invalid]="cardNumberFieldErrorMsg">
+                    <span class="form__control-title">Card Number</span>
+                    <input class="form__control-input"
+                           type="text"
+                           formControlName="cardNumber"
+                           (blur)="setCardNumberFieldErrorMsg()">
+                    <ng-container *ngTemplateOutlet="paymentSystem"></ng-container>
+                    <span class="form__control-error">{{ cardNumberFieldErrorMsg }}</span>
+                </div>
+                <div class="form__control_double">
+                    <div class="form__control"
+                         [class.form__control_invalid]="dateExpireFieldErrorMsg">
+                        <span class="form__control-title">Valid Through</span>
+                        <input class="form__control-input"
+                               type="text"
+                               formControlName="dateExpire"
+                               placeholder="MM/YY"
+                               [maxlength]="EXPIRE_DATE_VALID_LENGTH"
+                               (blur)="setDateExpireFieldErrorMsg()">
+                        <span class="form__control-error">{{ dateExpireFieldErrorMsg }}</span>
+                    </div>
+                    <div class="form__control"
+                         [class.form__control_invalid]="cvvFieldErrorMsg">
+                        <span class="form__control-title">CVV</span>
+                        <input class="form__control-input"
+                               type="text"
+                               formControlName="cvv"
+                               [minlength]="CVV_MIN_LENGTH"
+                               [maxlength]="CVV_MAX_LENGTH"
+                               (blur)="setValidateCvvFieldErrorMsg()">
+                        <span class="form__control-error">{{ cvvFieldErrorMsg }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form__button">
+                <button (click)="pay()">
+                    PAY
+                </button>
+                <div class="form__sucess-msg">
+                    <span *ngIf="showSuccesMsg">Success!</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<ng-template #paymentSystem>
+    <div class="credit-card__payment-system-icon">
+        <ng-container [ngSwitch]="cardNumberFirstDigit">
+            <img *ngSwitchCase="PaymentSystem.Mir"
+                 alt="Mir"
+                 src="assets/icons/mir.png">
+            <img *ngSwitchCase="PaymentSystem.AmericanExpress"
+                 alt="AmericanExpress"
+                 src="assets/icons/american-express.png">
+            <img *ngSwitchCase="PaymentSystem.Visa"
+                 alt="Visa"
+                 src="assets/icons/visa.png">
+            <img *ngSwitchCase="PaymentSystem.MasterCard"
+                 alt="MasterCard"
+                 src="assets/icons/master-card.png">
+            <img *ngSwitchCase="PaymentSystem.UnionPay"
+                 alt="UnionPay"
+                 src="assets/icons/union-pay.png">
+        </ng-container>
+    </div>
+</ng-template>
